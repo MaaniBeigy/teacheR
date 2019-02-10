@@ -137,7 +137,14 @@ str(x)
 typeof(x)
 class(x)
 summary(x)
-l <- structure(1:10, "dim" = c(2,5))
-
-
-
+n <- structure(
+  .Data = 1:10, 
+  "dim" = c(2,5),
+  "dimnames" = list(
+    c("foo", "bar"), c("a", "b", "c", "d", "e")
+    )
+)
+n
+str(n)
+class(n)
+typeof(n)
