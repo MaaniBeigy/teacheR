@@ -148,3 +148,50 @@ n
 str(n)
 class(n)
 typeof(n)
+# Two scalar arguments to specify rows and columns
+o <- matrix(1:6, ncol = 3, nrow = 2)
+# One vector argument to describe all dimensions
+p <- array(1:12, c(2, 3, 2))
+q = c(2,4,-1,2,0,1)  # note the order at which we entered the data
+Q = matrix(q, nrow = 2)
+dim(o)  # gets the dimensions of matrix o
+o[2,1]  # subsets the item in row 2, column 1
+o[2,]  # subsets all items in row 2
+t(o)  # transposes matrix o
+o %*% t(o) # multiplies matrix o by its transpose
+
+df <- data.frame(
+  id = 1:3, gender = c("m", "f", "m"), fbs = c(104, 98, 129)
+)
+str(df)
+df
+typeof(df)
+class(df)
+is.data.frame(df)
+is.list(df)
+source(config.R)
+df <- read.csv(  # comma separated text
+  file = paste0(  # the string concatenate function to make the address
+    dir,  # the directory address of project files 
+    "/data/df.csv"  # the relative address
+    ), 
+  fileEncoding = "UTF-8",
+  header = TRUE  # column names
+) 
+df <- read.table(  # plain text document 
+  file = paste0(dir, "/data/df.txt"), 
+  fileEncoding = "UTF-8",
+  header = TRUE  # column names
+)
+write.csv(  # comma separated text
+  x = df,
+  file = paste0(dir, "/output/df.csv"),
+  fileEncoding = "UTF-8"
+)
+write.table(  # plain text document 
+  x = df,
+  file = paste0(dir, "/output/df.txt"),
+  fileEncoding = "UTF-8",
+  sep = "|",  # separator character
+  col.names = TRUE  # column names
+)
