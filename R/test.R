@@ -169,6 +169,11 @@ typeof(df)
 class(df)
 is.data.frame(df)
 is.list(df)
+df <- read.csv(  # comma separated text
+  file = "/home/maanib/Documents/rprojects/teacheR/data/df.csv",
+  fileEncoding = "UTF-8",
+  header = TRUE  # column names
+) 
 source(config.R)
 df <- read.csv(  # comma separated text
   file = paste0(  # the string concatenate function to make the address
@@ -195,3 +200,152 @@ write.table(  # plain text document
   sep = "|",  # separator character
   col.names = TRUE  # column names
 )
+p <- c(1, 2, NA, 25, 16)
+mean(p, na.rm = TRUE)
+df
+df[2, 4]  # subsets the element in row 2 column 4
+df[ , 3]  # subsets the elements in column 3 
+df$id  # subsets all elements of id field
+df[ which(df$gender == "m"), ]  # subsets male gender 
+subset(  # subsets the element in row 2 column 4
+  df, 
+  row.names(df) == 2, 
+  select = 4
+) 
+subset(df, select = 3) # subsets the elements in column 3 
+subset(df,  select = "id")  # subsets all elements of id field
+subset(df, gender == "m")  # subsets male gender 
+
+is.integer(6L)
+df$diabetes <- 0
+for (i in 1:length(df$id)) {
+  if (df$fbs[i] < 100) {
+    df$diabetes[i] <- "Normal"
+  } else if (df$fbs[i] >= 100 & df$fbs[i] < 125) {
+    df$diabetes[i] <- "Prediabetes"
+  } else {
+    df$diabetes[i] <- "Diabetes"
+  }
+}
+df
+i <- 1
+while (i < 6) {
+  print(i)
+  i = i + 1
+}
+for (val in x) {
+  if (val == 3) {
+    next
+  }
+  print(val)
+}
+x <- 1:5
+for (val in x) {
+  if (val == 3) {
+    break
+  }
+  print(val)
+}
+
+x <- 1
+repeat {
+  print(x)
+  x = x + 1
+  if (x == 6) {
+    break
+  }
+}
+cent.to.inch <- function(x) {
+  inch <- x * 0.393701
+  return(inch)
+} 
+cent.to.inch(20)
+summary(iris)  # summary of all variables
+summary(cars$speed)  # summary of one variable
+cor(trees$Girth, trees$Volume)
+cor(trees$Girth, trees$Volume, method = "spearman")
+r <- cor.test(trees$Girth, trees$Volume)
+pvalue(
+  r$p.value, 
+  accuracy = 0.0001, 
+  decimal.mark = ".", 
+  add_p = TRUE
+)
+# First make a vector of Z-scores
+z_scores <- seq(-3, 3, by = 0.1)
+# Remember for dnorm the default value for mean is 0 and for sd is 1.
+dvalues <- dnorm(z_scores)
+plot(  # Plot where y = values and x = index of the value in the vector
+  dvalues,
+  xaxt = "n",  # Don't label the x-axis
+  type = "l",  # Make it a line plot
+  main = "pdf of the Standard Normal", 
+  xlab = "Z-score"
+) 
+# These commands label the x-axis
+axis(1, at = which(dvalues == dnorm(0)), labels = c(0))
+axis(1, at = which(dvalues == dnorm(1)), labels = c(-1, 1))
+axis(1, at = which(dvalues == dnorm(2)), labels = c(-2, 2))
+
+pvalues <- pnorm(z_scores)
+plot(
+  pvalues,
+  xaxt = "n",
+  type = "l",
+  main = "cdf of the Standard Normal",
+  xlab = "Quantiles",
+  ylab = "Probability Density"
+) 
+
+# These commands label the x-axis
+axis(1, at = which(pvalues == pnorm(-2)), labels = round(pnorm(-2), 2))
+axis(1, at = which(pvalues == pnorm(-1)), labels = round(pnorm(-1), 2))
+axis(1, at = which(pvalues == pnorm(0)), labels = c(.5))
+axis(1, at = which(pvalues == pnorm(1)), labels = round(pnorm(1), 2))
+axis(1, at = which(pvalues == pnorm(2)), labels = round(pnorm(2), 2))
+n10 <- rnorm(10, mean = 70, sd = 5)
+n100 <- rnorm(100, mean = 70, sd = 5)
+n10000 <-  rnorm(10000, mean = 70, sd = 5)
+par(mfrow = c(1, 3))
+hist(n10, breaks = 5)
+hist(n100, breaks = 20)
+hist(n10000, breaks = 100)
+shapiro.test(iris$Sepal.Width)
+hist(iris$Sepal.Width, freq = FALSE)
+curve(
+  dnorm(x, mean(iris$Sepal.Width), sd(iris$Sepal.Width)),
+  add = TRUE
+)
+
+str(infert)
+help(infert)
+infert.labels <- list("0" = "Control", "1" = "Case")
+infert$status <- dplyr::recode(infert$case, !!!infert.labels)
+infertility.table <- table(
+  infert$status, (infert$induced + infert$spontaneous)
+)
+
+chisq.test(infertility.table)
+fit <- glm(
+  case ~ induced + spontaneous,
+  family = binomial(link = logit),  # logistic regression
+  data = infert
+)
+summary(fit)
+
+fit$rsquare <- 1 - (fit$deviance/fit$null.deviance)
+table.coefficients <- summary(fit)$coefficients
+install.packages("questionr")
+require("questionr")
+odds.ratio(fit)
+iris2 <- iris[iris$Species %in% c(
+  "versicolor", "virginica"
+  ), ]
+iris2 <- subset(
+  iris, Species == "versicolor" | Species == "virginica"
+)
+t.test(Sepal.Width ~ Species, data = iris2)
+boxplot(weight ~ group, data = PlantGrowth)
+anova(lm(weight ~ group, data = PlantGrowth))
+
+
