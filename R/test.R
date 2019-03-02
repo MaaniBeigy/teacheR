@@ -345,7 +345,9 @@ iris2 <- subset(
   iris, Species == "versicolor" | Species == "virginica"
 )
 t.test(Sepal.Width ~ Species, data = iris2)
+levels(PlantGrowth$group)
 boxplot(weight ~ group, data = PlantGrowth)
-anova(lm(weight ~ group, data = PlantGrowth))
+anova(aov(weight ~ group, data = PlantGrowth))
+TukeyHSD(aov(weight ~ group, data = PlantGrowth))
 
 
