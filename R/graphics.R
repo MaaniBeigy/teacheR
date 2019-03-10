@@ -1,4 +1,6 @@
 # magical graphics in R by ggplot2
+require(ggplot2)
+require(ggthemes)
 ggplot(data = iris, aes(x = Sepal.Width)) +
   geom_histogram(
     fill = "#002B36", 
@@ -9,13 +11,17 @@ ggplot(data = iris, aes(x = Sepal.Width)) +
   ggthemes::theme_solarized(light = TRUE)
 
 
-ggplot(data = iris, aes(y = Sepal.Width, x = Species, fill = Species)) +
+ggplot(
+  data = PlantGrowth2, 
+  aes(y = weight, x = group, group = group, fill = group
+      )
+  ) +
   geom_boxplot(
     # fill = "#002B36", 
     alpha = 0.45
   ) + 
-  ggthemes::theme_solarized(light = TRUE) + 
-  scale_fill_manual(values = c("#6c71c4", "#d33682", "#b58900")) +
+  ggthemes::theme_solarized(light = TRUE)  + 
+  scale_fill_manual(values = c("#6c71c4", "#d33682", "#b58900")) + 
   guides(fill = FALSE)
 
 ggplot(iris, aes(x = Sepal.Width, y = Petal.Width)) + 
@@ -35,6 +41,7 @@ ggplot(
   ggthemes::theme_solarized(light = FALSE) + 
   scale_fill_manual(values = c("#6c71c4", "#d33682", "#b58900"))
 
+require(magrittr)
 data.frame(
   table(infert$case), 
   Status = c("Normal", "Infertile"),

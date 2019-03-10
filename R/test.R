@@ -8,9 +8,9 @@ BMI <- (weight)/(height/100)^2
 BMI
 mean(x = 1:100, na.rm = TRUE)
 BMI <- function(weight, height) {
-    if (height > 2.5) {
-        stop('height is not in meters')
-    } else (weight)/(height)^2
+  if (height > 2.5) {
+    stop('height is not in meters')
+  } else (weight)/(height)^2
 }
 
 a <- 8.4
@@ -47,31 +47,31 @@ is.character(c)
 is.factor(c)
 
 d <- list(
-    1:10,
-    "foo",
-    c(TRUE, FALSE, TRUE, TRUE),
-    c(7.2, 16.8)
-    )
+  1:10,
+  "foo",
+  c(TRUE, FALSE, TRUE, TRUE),
+  c(7.2, 16.8)
+)
 str(d)
 e <- list(
+  list(
     list(
-        list(
-            list(
-                1:10
-            )
-        )
+      list(
+        1:10
+      )
     )
+  )
 )
 e <- list(list(list(list(1:10))))
 str(e)
 f <- list(
-    "foo", list(
-        "bar", list(
-            "spam", list(
-                "eggs", 1:10
-            )
-        )
+  "foo", list(
+    "bar", list(
+      "spam", list(
+        "eggs", 1:10
+      )
     )
+  )
 )
 
 str(f)
@@ -81,12 +81,12 @@ is.recursive(f)
 is.list(f)
 
 g <- list(
-    list(1, 2),
-    c(3, 4)
+  list(1, 2),
+  c(3, 4)
 )
 h <- c(
-    list(1, 2),
-    c(3, 4)
+  list(1, 2),
+  c(3, 4)
 )
 str(g)
 str(h)
@@ -142,7 +142,7 @@ n <- structure(
   "dim" = c(2,5),
   "dimnames" = list(
     c("foo", "bar"), c("a", "b", "c", "d", "e")
-    )
+  )
 )
 n
 str(n)
@@ -179,7 +179,7 @@ df <- read.csv(  # comma separated text
   file = paste0(  # the string concatenate function to make the address
     dir,  # the directory address of project files 
     "/data/df.csv"  # the relative address
-    ), 
+  ), 
   fileEncoding = "UTF-8",
   header = TRUE  # column names
 ) 
@@ -340,7 +340,7 @@ require("questionr")
 odds.ratio(fit)
 iris2 <- iris[iris$Species %in% c(
   "versicolor", "virginica"
-  ), ]
+), ]
 iris2 <- subset(
   iris, Species == "versicolor" | Species == "virginica"
 )
